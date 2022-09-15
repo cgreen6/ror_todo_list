@@ -1,55 +1,47 @@
 class Api::NotesController < ApplicationController
-  before_action :set_list
-  before_action :set_todo, only: [:show, :update, :destroy]
-   # parent model Todo
+  before_action :set_todo 
+  before_action :set_note, only: [:show, :update, :destroy]
 
-  # model name notes
   def index
-    render json: @list.todos
+    render json: @todo.notes
   end
 
   def show
-    @notes = Notes.find(params[:id])
-    render json: @notes
+    render json: @note
   end
 
   def create
-    @notes = @list.todos.new(notes_params)
-    if @notes.save
-      render json: @notes
+    @note = @todo.notes.new(note_params)
+    if @note.save
+      render json: @note
     else
-      render json: { errors: @notes.errors },
-      status: :unprocessable_entity
+      render json: { errors: @note.errors }, status: :unprocessable_entity
     end
   end
 
   def update
-    if @notes.update(notes_params)
-      render json: @notes
+    if @note.update(note_params)
+      render json: @note
     else
-      render json: { erroros: @notes.errors },
-      status: :unprocessable_entity
+      render json: { errors: @note.errors }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @notes = Notes.find(params[:id])
-    @notes.destroy
-    render json: { message: 'Notes deleted' }
+    @note.destroy
+    render json: { message: 'Note Deleted' }
   end
 
   private
-    def notes_params
-      params.require(:notes).permit(:title, :complete, :price, :rating)
-    end
-
-    def set_list
-      @list = List.find
-      (params[:list_id])
-    end
-
     def set_todo
-      @todo = @list.todos.find(params[:id])
+      @todo = Todo.find(params[:todo_id])
     end
-  end
 
+    def note_params
+      params.require(:note).permit(:subject, :body)
+    end
+
+    def set_note
+      @note = @todo.notes.find(params[:id])
+    end
+end
