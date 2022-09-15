@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Navbar, Container, Nav } from 'react-bootstrap';
+import { MainNav } from '../../styles/sharedStyle';
 
 const MainNavbar = () => (
   // <nav>
@@ -26,15 +27,21 @@ const MainNavbar = () => (
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
         <Nav>
-          <Link to='/'>
-            <Nav.Link>Home</Nav.Link>
-          </Link>
-          <Link to='/about'>
-            <Nav.Link>About</Nav.Link>
-          </Link>
-          <Link to='/lists'>
-            <Nav.Link>Lists</Nav.Link>
-          </Link>
+          <Nav.Link>
+            <MainNav to='/'>
+              Home
+            </MainNav>
+          </Nav.Link>
+          <Nav.Link>
+            <MainNav to='/about'>
+              About
+            </MainNav>
+          </Nav.Link>
+          <Nav.Link>
+            <MainNav to='/lists'>
+              Lists
+            </MainNav>
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Container>

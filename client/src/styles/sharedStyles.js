@@ -1,19 +1,45 @@
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { Navbar, Container, Nav } from 'react-bootstrap';
+import { MainNav } from '../../styles/sharedStyle';
 
-const whatFont = (size) => {
-  switch (size) {
-    case 'sm':
-      return '12px';
-    case 'md':
-      return '24px';
-    default:
-      return '48px';
-  }
-}
+const MainNavbar = () => (
+  // <nav>
+  //   <ul>
+  //     <li>Todo List</li>
+  //     <Link to='/'>
+  //       <li>Home</li>
+  //     </Link>
+  //     <Link to='/about'>
+  //       <li>About</li>
+  //     </Link>
+  //     <Link to='/lists'>
+  //       <li>Lists</li>
+  //     </Link>
+  //   </ul>
+  // </nav>
+  <Navbar>
+    <Container>
+      <Link 
+        to='/'
+      >
+        <Navbar.Brand>TodoList</Navbar.Brand>
+      </Link>
+      <Navbar.Toggle />
+      <Navbar.Collapse className="justify-content-end">
+        <Nav>
+          <MainNav to='/'>
+            <Nav.Link>Home</Nav.Link>
+          </MainNav>
+          <MainNav to='/about'>
+            <Nav.Link>About</Nav.Link>
+          </MainNav>
+          <MainNav to='/lists'>
+            <Nav.Link>Lists</Nav.Link>
+          </MainNav>
+        </Nav>
+      </Navbar.Collapse>
+    </Container>
+  </Navbar>
+)
 
-export const MainHeader = styled.h1`
-  color: purple;
-  font-size: ${ props => whatFont(props.size) };
-  background: grey;
-  text-align: center;
-`
+export default MainNavbar;
